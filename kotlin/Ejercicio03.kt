@@ -1,26 +1,48 @@
-fun verbos(list: MutableList<String>):Int{
-
-    var contador=0
-    for (verbo in list) {
-        var minuscula = verbo.lowercase()//convierte a minuscula
-        if (minuscula.endsWith("ar") ||minuscula.endsWith("er") || minuscula.endsWith("ir")) {
-            contador++
-        }
-
-    }
-
-    return contador
-}
+import kotlin.time.Duration.Companion.seconds
 
 fun main(){
-    var num:Int
-    println("cuantas palabras desea ingresar")
-     num= readLine()!!.toInt()
-    var lista : MutableList<String> = mutableListOf()
-    repeat(num) {
-        println("Ingresar la palabra ${it+1} :")
-        var palabra = readLine()!!.toString()
-        lista.add(palabra)
+    var poblacionMenor=""
+    var lista : MutableList<Triple<String,Int, String>> = mutableListOf()
+    print ("Ingrese el nombre del municipio: ")
+    var nombre = readLine()!!.toString()
+    print ("Ingrese la población: ")
+    var poblacion = readLine()!!.toInt()
+    print ("Ingrese el nombre del municipio: ")
+    var departamento = readLine()!!.toString()
+    lista.add(Triple(nombre,poblacion,departamento))
+
+    while(nombre!="" ||poblacion>0){
+        print ("Ingrese el nombre del municipio: ")
+        var n = readLine()!!.toString()
+        print ("Ingrese la población: ")
+        var p = readLine()!!.toDouble()
+        print ("Ingrese el nombre del municipio: ")
+        var d = readLine()!!.toString()
+        lista.add(Triple(nombre,poblacion,departamento))
     }
-    println("Del numero de palabras $num los verbos son ${verbos(lista)}")
+
+println("El municipio menos poblado es: ${primerafuncion(lista)}")
+
+
+}
+fun primerafuncion(list:MutableList<Triple<String,Int, String>>):String{
+
+    var poblacion_menor:Int = 99999999
+    var nombre_menor:String = ""
+    for ((nombre, poblacion, departamento) in  list ) {
+            if (nombre==""){
+
+            }else if(poblacion<poblacion_menor){
+                poblacion_menor=poblacion
+                nombre_menor=nombre
+
+
+            }
+        }
+
+
+
+return nombre_menor
+
+
 }

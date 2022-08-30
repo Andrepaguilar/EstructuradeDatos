@@ -1,36 +1,33 @@
-//Funcion
+import kotlin.math.pow
 
-fun definitivasEstudiantes(listaD:MutableList<Float>): Pair<Int,Float> {
-
-    var sumaN = 0
-    var promedioN = 0.0.toFloat()
-    for(i in listaD){
-        if(i>=60){
-            sumaN+=1
-        }
-        promedioN+=i
-    }
-    return Pair(sumaN,promedioN/listaD.size)
+fun distancia_ciudad (latitud:Double, longitud:Double):Double{
+    var distancia=(latitud.pow(2)+longitud.pow(2))
+    return distancia
 }
 
-//Programa
-
 fun main(){
-    var listaD: MutableList<Float> = mutableListOf()
-    do {
+    print ("Ingrese el nombre de la ciudad: ")
+    var nombre_ciudad = readLine()!!.toString()
+    print ("Ingrese la latitud de la ciudad +${nombre_ciudad}: ")
+    var latitud = readLine()!!.toDouble()
+    print ("Ingrese la longitud de la ciudad +${nombre_ciudad}: ")
+    var longitud = readLine()!!.toDouble()
+    var latitud_bogota=4.60971
+    var longitu_bogota=-74.08175
+    var distancia_bogota=(latitud_bogota.pow(2)+longitu_bogota.pow(2))
+    var distancia:Double=0.0
+    var nombre=""
 
-        print("Ingrese las notas de los etudiantes de la clase y para dejar de ingresar notas" +
-                "digite un numero negativo (ejemplo-1): ")
-        var notaE = readLine()!!.toFloat()
-        if(notaE<0.0.toFloat()){
-            break
+
+    var lista : MutableList<Triple<String,Double, Double>> = mutableListOf()
+    for ((nombre_ciudad,latitud,longitud) in lista){
+        distancia=(distancia_ciudad(latitud,longitud))
+        if(distancia>distancia_bogota){
+        distancia =distancia
+        nombre=nombre_ciudad
         }
-        listaD.add(notaE)
+    }
 
-    }while(true)
-    var (aprobaron,promedioClase) = definitivasEstudiantes(listaD)
-
-    println("La cantidad de estudiantes que aprobaron es de: $aprobaron y la cantidad de los que perdieron es de: ${(listaD.size)-aprobaron}")
-    println("Promedio de definitivas de la clase: $promedioClase")
+return (distancia,nombre)
 
 }
