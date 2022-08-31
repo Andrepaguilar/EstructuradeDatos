@@ -1,41 +1,42 @@
 
-fun resultados(list: MutableList<Triple<Double,Double,Double>>):Triple<Pair<Double,Double>,Pair<Int,Int>,Pair<Int,Int>>{
+fun notas(list: MutableList<Triple<Double,Double,Double>>):Triple<Pair<Double,Double>,Pair<Int,Int>,Pair<Int, Int>>{
 
-    var estudiantes_pasan=0
-    var estudiantes_pierden=0
-    var cantidad = 0
-    var acumulado_notas = 0.0
-    var estudiantes10 = 0
-    var estudiantes100 = 0
-    var nota_final=0.0
+
+    var Estudiantes_aprueban=0
+    var Estudiantes_pierden=0
+    var Cantidad = 0
+    var Acumulado_notas = 0.0
+    var Estudiantes_nota_10 = 0
+    var estudiantes_nota_100 = 0
+    var Definitiva=0.0
 
     for ((nota1:Double,nota2:Double,nota3:Double) in list){
 
-        nota_final =  (nota1*0.25)+(nota2*0.25)+(nota3*0.5)
-        acumulado_notas = acumulado_notas+nota_final
+        Definitiva =  (nota1*0.25)+(nota2*0.25)+(nota3*0.5)
+        Acumulado_notas = Acumulado_notas+Definitiva
 
-        if(nota_final >=60.0){
-            estudiantes_pasan = estudiantes_pasan +1
+        if(Definitiva >=60.0){
+            Estudiantes_aprueban = Estudiantes_aprueban +1
 
         }else{
-            estudiantes_pierden = estudiantes_pierden +1
+            Estudiantes_pierden = Estudiantes_pierden +1
         }
 
-        if (nota_final == 10.0){
-            estudiantes10 = estudiantes10 +1
-        }else if(nota_final == 100.0){
-            estudiantes100 = estudiantes100 +1
+        if (Definitiva == 10.0){
+            Estudiantes_nota_10 = Estudiantes_nota_10 +1
+        }else if(Definitiva == 100.0){
+            estudiantes_nota_100 = estudiantes_nota_100 +1
         }
 
-        cantidad++
+        Cantidad++
 
 
 
     }
-    var promedio = acumulado_notas/cantidad
-    var retorno = Triple(Pair(nota_final,promedio), Pair(estudiantes_pasan,estudiantes_pierden-1),
-        Pair(estudiantes10,estudiantes100))
-    return retorno
+    var promedio = Acumulado_notas/Cantidad
+    var resultad_final = Triple(Pair(Definitiva,promedio), Pair(Estudiantes_aprueban,Estudiantes_pierden-1),
+        Pair(Estudiantes_nota_10,estudiantes_nota_100))
+    return resultad_final
 
 
 }
@@ -43,29 +44,28 @@ fun resultados(list: MutableList<Triple<Double,Double,Double>>):Triple<Pair<Doub
 fun main() {
 
     var list:MutableList<Triple<Double,Double,Double>> = mutableListOf()
-    println("Ingrese la nota 1")
-    var nota1 = readln()!!.toDouble()
-    println("Ingrese la nota 2")
-    var nota2 = readln()!!.toDouble()
-    println("Ingrese la nota 3")
-    var nota3 = readln()!!.toDouble()
+    println("Ingrese Nota 1")
+    var Nota1 = readln()!!.toDouble()
+    println("Ingrese Nota 2")
+    var Nota2 = readln()!!.toDouble()
+    println("Ingrese Nota 3")
+    var Nota3 = readln()!!.toDouble()
 
-    list.add(Triple(nota1,nota2,nota3))
-    var retorno  = resultados(list)
+    list.add(Triple(Nota1,Nota2,Nota3))
+    var retorno  = notas(list)
     println("la nota final fue de ${retorno.first.first}")
-    while (nota1 >= 0 || nota2>= 0 || nota3>= 0){
+    while (Nota1 >= 0 || Nota2>= 0 || Nota3>= 0){
 
 
-        println("Ingrese la nota 1")
-        nota1 = readln()!!.toDouble()
-        println("Ingrese la nota 2")
-        nota2 = readln()!!.toDouble()
-        println("Ingrese la nota 3")
-        nota3 = readln()!!.toDouble()
-
-        if(nota1 >= 0 || nota2>= 0 || nota3>= 0) {
-            list.add(Triple(nota1, nota2, nota3))
-            retorno = resultados(list)
+        println("Ingrese Nota 1")
+        var Nota1 = readln()!!.toDouble()
+        println("Ingrese Nota 2")
+        var Nota2 = readln()!!.toDouble()
+        println("Ingrese Nota 3")
+        var Nota3 = readln()!!.toDouble()
+        if(Nota1 >= 0 || Nota2>= 0 || Nota3>= 0) {
+            list.add(Triple(Nota1, Nota2, Nota3))
+            retorno = notas(list)
             println("la nota final fue de ${retorno.first.first}")
         }
 
