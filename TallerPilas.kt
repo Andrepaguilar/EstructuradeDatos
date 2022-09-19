@@ -19,6 +19,112 @@ import kotlin.test.assertFails
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
+
+/**
+ * Ejercicio 12
+ * Algoritmo expresiones matematicas balanceadas
+ */
+
+fun algoritmoexpresionmatematicabalanceada(expresion: IList<String>): Boolean {
+    val Pila: IStack<String> = TLinkedStack()
+
+    for (n in expresion){
+        if (n == "(" || n == "{" || n=="["){
+            Pila.push(n)
+        }
+        else{
+            if (n == ")" || n == "}" || n == "]"){
+                if (Pila.isEmpty){
+                    return false
+                }
+
+                val tope = Pila.peek()
+                Pila.pop()
+                if ((tope == "(" && n != ")") || (tope == "{" && n != "}") || (tope == "[" && n != "]")){
+                    return false
+                }
+
+            }
+        }
+    }
+    return Pila.isEmpty
+}
+/**
+ * Ejercicio 13
+ * Algoritmo reemplaza limitadores por parentesis
+ */
+
+fun Algoritmoreemplazar(expresion: IList<String>): Unit {
+
+    var Signo:String
+    for (n in 0 until  expresion.size){
+        if (expresion.get(n) == "[" || expresion.get(n) == "{"){
+            Signo = "("
+            expresion.set(n,Signo)
+        }else if (expresion.get(n) == "]" || expresion.get(n) == "}"){
+            Signo = ")"
+            expresion.set(n,Signo)
+        }
+
+    }
+
+}
+
+/**
+ * Ejercicio 14
+ * Conversión infijo postfijo
+ */
+
+fun ConversionPostfijo(expresion: IList<String>): IList<String> {
+    val Pila: IStack<String> = TLinkedStack()
+    val lista: IList<String> = TList()
+
+    for (n in expresion){
+        if (n == "+" || n == "-" || n == "*" || n == "/" || n == "%"){
+            Pila.push(n)
+        }else if(n == "("){
+            continue
+        }else if(n == ")"){
+            lista.add(Pila.peek())
+            Pila.pop()
+        }
+        else{
+            lista.add(n)
+        }
+    }
+    return lista;
+}
+
+/**
+ * Ejercicio 15
+ * Algoritmo evalua expersión postfija
+ */
+
+
+fun Algoritmoevaluaexpresionpostfija(expression: IList<String>): Int {
+    val Pila: IStack<Int> = TLinkedStack()
+    for (i in expression){
+        if (i=="+"||i=="-"||i=="*"||i=="/"||i=="%"){
+            var ultimo1 = Pila.peek()
+            Pila.pop()
+            var ultimo2 = Pila.peek()
+            Pila.pop()
+            when (i){
+                "+" -> Pila.push(ultimo2+ultimo1)
+                "-" -> Pila.push(ultimo2-ultimo1)
+                "*" -> Pila.push(ultimo2*ultimo1)
+                "/" -> Pila.push(ultimo2/ultimo1)
+                "%" -> Pila.push(ultimo2%ultimo1)
+            }
+        }
+        else{
+            Pila.push(i.toInt())
+        }
+    }
+    return Pila.peek()
+}
+
+
 /**
  * Ejercicio 01
  * Obtener el fondo de la pila
@@ -266,6 +372,9 @@ fun <T> igualesPilas(pila1: IStack<T>, pila2: IStack<T>): Boolean {
 
     return true
 }
+
+
+
 
 class ProbarPila {
     @Test
